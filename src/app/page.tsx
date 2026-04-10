@@ -13,13 +13,31 @@ export default function Home() {
   const [lines, setLines] = useState<Line[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lines`)
-      .then((res) => res.json())
-      .then((data) => setLines(data))
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
+ useEffect(() => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  console.log("API URL:", API_URL); // debug
+
+  if (!API_URL) {
+    console.error("API URL is undefined ❌");
+    setLoading(false);
+    return;
+  }
+
+  fetch(`${API_URL}/api/lines`)
+    .then((res) => {
+      console.log("Response status:", res.status);
+      return res.json();
+    })
+    .then((data) => {
+      console.log("LINES DATA:", data); // debug
+      setLines(data);
+    })
+    .catch((err) => {
+      console.error("FETCH ERROR:", err);
+    })
+    .finally(() => setLoading(false));
+}, []);
 
   const handleLineClick = (lineId: number) => {
     router.push(`/line/${lineId}`);
