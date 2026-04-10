@@ -227,63 +227,104 @@ const label = `${day}/${month}/${year} ${e.timeSlot}`;
     </div>
 
     {/* FILTER CARD */}
-    <div className="bg-white p-4 rounded-xl shadow-md mb-6 flex flex-wrap gap-4 items-end">
-      <input
-        type="date"
-        className="border p-2 rounded-md focus:ring-2 focus:ring-blue-400"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-      />
+<div
+  className="
+    bg-white p-4 rounded-xl shadow-md mb-6
+    flex flex-wrap gap-4 items-end
+  "
+>
+  {/* DATE INPUT */}
+  <input
+    type="date"
+    className="
+      border border-gray-400
+      bg-white text-gray-800
+      px-3 py-2 rounded-md
+      shadow-sm
+      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+      transition
+    "
+    value={startDate}
+    onChange={(e) => setStartDate(e.target.value)}
+  />
 
-      <input
-        type="date"
-        className="border p-2 rounded-md focus:ring-2 focus:ring-blue-400"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-      />
+  <input
+    type="date"
+    className="
+      border border-gray-400
+      bg-white text-gray-800
+      px-3 py-2 rounded-md
+      shadow-sm
+      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+      transition
+    "
+    value={endDate}
+    onChange={(e) => setEndDate(e.target.value)}
+  />
 
-      <select
-        className="border p-2 rounded-md focus:ring-2 focus:ring-blue-400"
-        onChange={(e) => {
-          const val = e.target.value;
-          setSelectedProcess(val ? Number(val) : null);
-          setSelectedParameter(null);
-        }}
-      >
-        <option value="">Select Process</option>
-        {structure.map((p: any) => (
-          <option key={p.id} value={p.id}>
-            {p.name}
-          </option>
-        ))}
-      </select>
+  {/* PROCESS SELECT */}
+  <select
+    className="
+      border border-gray-400
+      bg-white text-gray-800
+      px-3 py-2 rounded-md
+      shadow-sm
+      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+      transition
+    "
+    onChange={(e) => {
+      const val = e.target.value;
+      setSelectedProcess(val ? Number(val) : null);
+      setSelectedParameter(null);
+    }}
+  >
+    <option value="">Select Process</option>
+    {structure.map((p: any) => (
+      <option key={p.id} value={p.id}>
+        {p.name}
+      </option>
+    ))}
+  </select>
 
-      <select
-        className="border p-2 rounded-md focus:ring-2 focus:ring-blue-400"
-        disabled={!selectedProcess}
-        onChange={(e) => {
-          const val = e.target.value;
-          setSelectedParameter(val ? Number(val) : null);
-        }}
-      >
-        <option value="">Select Parameter</option>
-        {structure
-          .find((p: any) => p.id === selectedProcess)
-          ?.parameters.map((param: any) => (
-            <option key={param.id} value={param.id}>
-              {param.name}
-            </option>
-          ))}
-      </select>
+  {/* PARAMETER SELECT */}
+  <select
+    className="
+      border border-gray-400
+      bg-white text-gray-800
+      px-3 py-2 rounded-md
+      shadow-sm
+      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+      transition
+      disabled:bg-gray-100 disabled:text-gray-400
+    "
+    disabled={!selectedProcess}
+    onChange={(e) => {
+      const val = e.target.value;
+      setSelectedParameter(val ? Number(val) : null);
+    }}
+  >
+    <option value="">Select Parameter</option>
+    {structure
+      .find((p: any) => p.id === selectedProcess)
+      ?.parameters.map((param: any) => (
+        <option key={param.id} value={param.id}>
+          {param.name}
+        </option>
+      ))}
+  </select>
 
-      {/* EXPORT BUTTON */}
-      <button
-        onClick={exportToExcel}
-        className="bg-green-600 hover:bg-green-700 transition text-white px-5 py-2 rounded-lg shadow"
-      >
-        Export to Excel
-      </button>
-    </div>
+  {/* EXPORT BUTTON */}
+  <button
+    onClick={exportToExcel}
+    className="
+      bg-green-600 hover:bg-green-700
+      text-white px-5 py-2 rounded-lg
+      shadow-md transition
+    "
+  >
+    Export to Excel
+  </button>
+</div>
 
     {/* GRAPH CARD */}
     {selectedProcess &&
