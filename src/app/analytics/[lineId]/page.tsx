@@ -249,15 +249,16 @@ const label = `${day}/${month}/${year} ${e.timeSlot}`;
   />
 
   <input
-    type="date"
-    className="
-      border border-gray-400
-      bg-white text-gray-800
-      px-3 py-2 rounded-md
-      shadow-sm
-      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-      transition
-    "
+  type="date"
+  className="
+    border border-gray-400
+    bg-white text-black
+    px-3 py-2 rounded-md
+    shadow-sm
+    focus:outline-none
+    focus:ring-2 focus:ring-blue-500
+    [color-scheme:light]
+  "
     value={endDate}
     onChange={(e) => setEndDate(e.target.value)}
   />
