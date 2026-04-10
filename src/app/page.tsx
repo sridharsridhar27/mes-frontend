@@ -14,7 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/lines")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lines`)
       .then((res) => res.json())
       .then((data) => setLines(data))
       .catch((err) => console.error(err))
